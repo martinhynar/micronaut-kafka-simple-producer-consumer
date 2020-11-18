@@ -1,0 +1,10 @@
+{
+ "namespace": "com.example.avro",
+ "type": "record",
+ "name": "AvroMessage",
+ "fields": [
+     {"name": "id", "type": "string"},
+     {"name": "message", "type": "string"},
+     {"name": "note", "type": "string"}
+ ]
+}

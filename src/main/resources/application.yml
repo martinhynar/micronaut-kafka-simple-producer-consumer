@@ -1,0 +1,41 @@
+micronaut:
+  application:
+    name: micronaut-kafka-simple-producer-consumer
+  server:
+    port: 8081
+
+endpoints:
+  health:
+    sensitive: false
+
+kafka:
+  schema:
+    registry:
+      url: http://localhost:8085
+  bootstrap:
+    servers:
+      - localhost:9092
+  producers:
+    producer-avro:
+      key:
+        serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value:
+        serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    producer-json:
+      key:
+        serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value:
+        serializer: com.example.JsonMessageSerializer
+
+  consumers:
+    example-group-avro:
+      specific.avro.reader: true
+      key:
+        deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value:
+        deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    example-group-json:
+      key:
+        deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value:
+        deserializer: com.example.JsonMessageDeserializer
